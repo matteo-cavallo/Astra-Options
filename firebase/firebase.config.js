@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import {firebaseConfig} from './credentials.js';
 require('firebase/firestore');
 
 import firebaseConfig from './firebase.credentials';

@@ -22,3 +22,6 @@ config/tunnel.pid
 
 #Firebase Config
 firebase/firebase.credentials.js
+
+#firebase credentials
+firebase/credentials.js
