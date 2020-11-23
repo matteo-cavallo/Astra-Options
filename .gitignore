@@ -19,3 +19,6 @@ config/tunnel.pid
 
 # next build output
 .next/
+
+#firebase credentials
+firebase/credentials.js
