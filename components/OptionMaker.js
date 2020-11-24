@@ -1,9 +1,10 @@
 import React from "react";
-import { Card, Layout, TextField } from "@shopify/polaris";
+import { Card, Layout, TextField,FormLayout,Button } from "@shopify/polaris";
 
-export default OptionMaker = ()=> {
+function OptionMaker ({name,remove}) {
+
   return (
-      <Card title="Astra Option" sectioned>
+      <Card title={name} sectioned>
         <FormLayout>
           <FormLayout.Group condensed>
             <TextField label="Title" onChange={() => {}} />
@@ -11,9 +12,15 @@ export default OptionMaker = ()=> {
             <TextField label="Input Type" onChange={() => {}} />
             <TextField label="Required" onChange={() => {}} />
             <TextField label="Price" onChange={() => {}} />
+            <TextField label="MoreOptions" onChange={() => {}} />
+            <TextField label="MoreOptions2" onChange={() => {}} />
           </FormLayout.Group>
-        </FormLayout>
+        </FormLayout><br/>
+        <Button onClick={()=>remove(name)}>Remove</Button>
       </Card>
   );
 }
+
+
+export default OptionMaker;
 
