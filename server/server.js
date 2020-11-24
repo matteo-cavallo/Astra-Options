@@ -88,17 +88,51 @@ app.prepare().then(() => {
    
   */
 
+  router.get("/api/options/:shop/:product", async (ctx) => {
+    const {shop, product} = ctx.params;
+    let options = [];
+    let templates = [];
+    console.log("API Request - Shop:", shop, " Product Id:", product);
 
-  router.get("/api/dbtest", async(ctx) => {
-    firebase.collection("clients").get().then( data => {
-      console.log("Data sent");
-      ctx.body = {
-        ciao: "CIAO"
-      };
-    }).catch( e => {
-      console.log(e);
+    /*
+     Call Firebase - Fetch Products templates IDs
+    */
+    await firebase
+    .collection("clients").doc(shop)
+    .collection("products").doc(product)
+    .collection("templates")
+    .get()
+    .then( querySnapshot => {
+      querySnapshot.forEach( doc => {
+        templates = [doc.data(), ...templates];
+      })
     })
-  })
+    .catch( e => {
+      console.log("Error Firebase: Query Products Templates", e);
+      ctx.res.statusCode = 403;
+    });
+
+    /*
+     Call Firebase - Fetch Templates Options
+    */
+   const optionsPromises = templates.map( template => firebase.collection("templates").doc(template.id).collection("options").get());
+   await Promise.all(optionsPromises).then( querySnapshot => {
+     querySnapshot.forEach( query => {
+       query.forEach( doc => {
+         console.log("Doc: ", doc.data());
+         options = [doc.data(),...options];
+       })
+     })
+   })
+
+    console.log("Templates:", templates);
+    console.log("Options:", options);
+
+    ctx.body = {
+      options: options
+    }
+  });
+
 
 
   router.get("(.*)", verifyRequest(), async (ctx) => {
