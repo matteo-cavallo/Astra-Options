@@ -52,8 +52,13 @@ export default function Template({ shopOrigin }) {
       <Layout>
         <Layout.Section>
           <Layout>
+            <Layout.Section>
+              <Card title="Template Layout" sectioned>
+                {theOptions.length == 0 ?  <h1>No Options Added</h1> : theOptions.map(option=> option.obj)}
+              </Card>
+            </Layout.Section>
             <Layout.Section secondary>
-              <Card title="Options" sectioned>
+            <Card title="Options" sectioned>
                 <TextField
                   label="Template Name"
                   value={templateNameValue}
@@ -72,11 +77,7 @@ export default function Template({ shopOrigin }) {
                 <Button onClick={add} >Add Option Field</Button>
 
               </Card>
-            </Layout.Section>
-            <Layout.Section>
-              <Card title="Template Layout" sectioned>
-                {theOptions.length == 0 ?  <h1>No Options Added</h1> : theOptions.map(option=> option.obj)}
-              </Card>
+
             </Layout.Section>
           </Layout>
         </Layout.Section>
