@@ -1,7 +1,7 @@
 import firebase from "firebase";
 require("firebase/firestore");
 
-import firebaseConfig from "./firebase.credentials";
+import firebaseConfig from "./credentials.js";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);

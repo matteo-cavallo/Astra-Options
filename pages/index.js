@@ -16,11 +16,13 @@ function Index({ shopOrigin }) {
   const [selectedTab, setSelected] = useState(0);
   const [templates, setTemplates] = useState([]);
 
+  
   useEffect(() => {
     getTemplatesByShop(shopOrigin).then((d) => {
       setTemplates(d);
     });
   }, []);
+  
 
   const handleTabChange = useCallback(
     (selectedTabIndex) => setSelected(selectedTabIndex),
@@ -39,7 +41,7 @@ function Index({ shopOrigin }) {
   return (
     <Page
       title="Templates"
-      primaryAction={{ content: "Create template" }}
+      primaryAction={{ content: "Create template", url:'/template' }}
       separator
     >
       <Layout>
